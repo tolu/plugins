@@ -10,6 +10,16 @@ import resolveHost from './resolveHost';
 
 const TSLIB_ID = '\0tslib';
 
+/**
+ * @typedef { import("..").RollupTypescriptOptions } RollupTypescriptOptions
+ * @typedef { import("rollup").Plugin } Plugin
+ * @typedef { import("typescript") } TypeScript
+ */
+
+/**
+ * @param { RollupTypescriptOptions } options
+ * @returns { Plugin }
+ */
 export default function typescript(options = {}) {
   let opts = Object.assign({}, options);
 
@@ -22,6 +32,7 @@ export default function typescript(options = {}) {
   delete opts.exclude;
 
   // Allow users to override the TypeScript version used for transpilation and tslib version used for helpers.
+  /** @type { TypeScript } */
   const tsRuntime = opts.typescript || ts;
   const tslib =
     opts.tslib ||
